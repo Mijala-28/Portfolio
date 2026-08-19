@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mijala Maharjan — React Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg: #F1F3F6;
+  --surface: #FFFFFF;
+  --ink: #141B2E;
+  --ink-soft: #4A5266;
+  --teal: #1F8A70;
+  --teal-deep: #14614E;
+  --amber: #E8A33D;
+  --amber-deep: #9C6B1F;
+  --border: #DDE1E8;
+  --editor-bg: #1B2333;
+  --editor-line: #2A3448;
+  --editor-text: #C9D1E0;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:'Inter', sans-serif;
+  line-height:1.6;
+}
+.wrap{max-width:960px;margin:0 auto;padding:0 28px;}
+code, .mono{font-family:'JetBrains Mono', monospace;}
+h1,h2,h3{font-family:'Space Grotesk', sans-serif; margin:0;}
+a{color:inherit;}
+
+/* ---------- NAV ---------- */
+nav{
+  position:sticky; top:0; z-index:20;
+  background:rgba(241,243,246,0.92);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--border);
+}
+nav .wrap{
+  display:flex; align-items:center; justify-content:space-between;
+  height:60px;
+}
+.nav-logo{font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:16px; color:var(--ink);}
+.nav-links{display:flex; gap:26px; list-style:none; margin:0; padding:0;}
+.nav-links a{
+  text-decoration:none; font-size:14px; font-weight:500; color:var(--ink-soft);
+  font-family:'JetBrains Mono',monospace;
+  transition:color .15s;
+}
+.nav-links a:hover{color:var(--teal-deep);}
+.nav-cta{
+  font-family:'JetBrains Mono',monospace;
+  font-size:13px; font-weight:500;
+  background:var(--ink); color:#fff;
+  padding:8px 16px; border-radius:6px;
+  text-decoration:none;
+}
+@media (max-width:640px){ .nav-links{display:none;} }
+
+/* ---------- HERO ---------- */
+header.hero{padding:64px 0 40px;}
+.hero-grid{display:grid; grid-template-columns:1.3fr 1fr; gap:40px; align-items: center;}
+@media (max-width:720px){ .hero-grid{grid-template-columns:1fr;} .hero-photo{order:-1; margin:0 auto;} }
+.eyebrow{
+  font-family:'JetBrains Mono',monospace;
+  font-size:13px; color:var(--teal-deep);
+  display:flex; align-items:center; gap:8px;
+  margin-bottom:14px;
+}
+.eyebrow::before{
+  content:""; width:8px; height:8px; border-radius:50%;
+  background:var(--teal); display:inline-block;
+  box-shadow:0 0 0 3px rgba(31,138,112,0.18);
+}
+.hero h1{font-size:42px; line-height:1.15; font-weight:700; letter-spacing:-0.5px;}
+.hero p.lede{font-size:17px; color:var(--ink-soft); max-width:520px; margin-top:16px;}
+.hero-actions{display:flex; gap:12px; margin-top:26px; flex-wrap:wrap;}
+.btn{
+  font-family:'JetBrains Mono',monospace; font-size:14px; font-weight:500;
+  padding:11px 20px; border-radius:6px; text-decoration:none;
+  border:1px solid transparent; display:inline-flex; align-items:center; gap:8px;
+  transition:transform .12s ease, background .15s;
+}
+.btn:hover{transform:translateY(-1px);}
+.btn-primary{background:var(--teal); color:#fff;}
+.btn-primary:hover{background:var(--teal-deep);}
+.btn-ghost{background:transparent; color:var(--ink); border-color:var(--border);}
+.btn-ghost:hover{background:var(--surface); border-color:var(--ink);}
+
+/* photo frame */
+.photo-frame{
+  position:relative;
+  width:100%; aspect-ratio:4/5; max-width:220px;
+  border-radius:14px; overflow:hidden;
+  background:var(--editor-bg);
+  border:1px solid var(--border);
+  box-shadow:0 20px 40px -18px rgba(20,27,46,0.35);
+  margin-left: auto;
+}
+.photo-frame img{width:100%; height:100%; object-fit:cover; display:block;}
+.photo-fallback{
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px;
+  width:100%; height:100%; color:#6E7A93;
+}
+.photo-fallback i{font-size:36px;}
+.photo-fallback span{font-family:'JetBrains Mono',monospace; font-size:13px;}
+
+/* ---------- SECTION SHARED ---------- */
+section{padding:56px 0;}
+.section-head{display:flex; align-items:baseline; gap:14px; margin-bottom:28px;}
+.section-tag{
+  font-family:'JetBrains Mono',monospace; font-size:13px; color:var(--amber-deep);
+  background:rgba(232,163,61,0.14); padding:3px 10px; border-radius:5px;
+}
+.section-head h2{font-size:26px;}
+.divider{border:none; border-top:1px solid var(--border); margin:0;}
+
+/* ---------- ABOUT ---------- */
+.about-grid{display:grid; grid-template-columns:1.3fr 1fr; gap:36px;}
+.about-grid p{color:var(--ink-soft); font-size:15.5px;}
+.stack-list{list-style:none; margin:0; padding:0; display:grid; gap:10px;}
+.stack-list li{
+  font-family:'JetBrains Mono',monospace; font-size:13px;
+  background:var(--surface); border:1px solid var(--border); border-radius:6px;
+  padding:9px 12px; display:flex; justify-content:space-between;
+}
+.stack-list li b{font-weight:500; color:var(--ink);}
+.stack-list li span{color:var(--ink-soft);}
+@media (max-width:720px){ .about-grid{grid-template-columns:1fr;} }
+
+/* ---------- PROJECTS ---------- */
+.project-card{
+  background:var(--surface); border:1px solid var(--border); border-radius:12px;
+  padding:26px 28px; margin-bottom:20px;
+}
+.project-top{display:flex; justify-content:space-between; align-items:flex-start; gap:16px; flex-wrap:wrap;}
+.project-top h3{font-size:19px;}
+.project-kicker{font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--teal-deep); margin-bottom:6px; display:block;}
+.project-links{display:flex; gap:10px; flex-shrink:0;}
+.project-links a{
+  font-family:'JetBrains Mono',monospace; font-size:12.5px; text-decoration:none;
+  color:var(--ink); border:1px solid var(--border); padding:6px 12px; border-radius:6px;
+}
+.project-links a:hover{border-color:var(--ink);}
+.project-card p.desc{color:var(--ink-soft); margin:14px 0 16px; font-size:15px;}
+.tag-row{display:flex; flex-wrap:wrap; gap:8px;}
+.tag{
+  font-family:'JetBrains Mono',monospace; font-size:11.5px;
+  background:rgba(31,138,112,0.1); color:var(--teal-deep);
+  padding:4px 10px; border-radius:5px;
+}
+.tag.amber{background:rgba(232,163,61,0.14); color:var(--amber-deep);}
+
+/* ---------- EXPERIENCE ---------- */
+.exp-item{display:grid; grid-template-columns:150px 1fr; gap:20px; padding:18px 0; border-bottom:1px solid var(--border);}
+.exp-item:last-child{border-bottom:none;}
+.exp-date{font-family:'JetBrains Mono',monospace; font-size:12.5px; color:var(--ink-soft); padding-top:2px;}
+.exp-item h3{font-size:16.5px; margin-bottom:6px;}
+.exp-item p{color:var(--ink-soft); font-size:14.5px; margin:0 0 4px;}
+.exp-item ul{margin:8px 0 0; padding-left:18px; color:var(--ink-soft); font-size:14.5px;}
+.exp-item li{margin-bottom:4px;}
+
+/* ---------- CONTACT ---------- */
+.contact-card{
+  background:var(--editor-bg); border-radius:12px; padding:36px 34px;
+  color:var(--editor-text); display:flex; justify-content:space-between; align-items:center; gap:24px; flex-wrap:wrap;
+}
+.contact-card h2{color:#fff; font-size:24px;}
+.contact-card p{color:#9AA6C0; font-size:14.5px; margin-top:8px; max-width:380px;}
+.contact-links{display:flex; gap:10px; flex-wrap:wrap;}
+.contact-links a{
+  font-family:'JetBrains Mono',monospace; font-size:13px; text-decoration:none;
+  color:#fff; border:1px solid #37415A; padding:9px 16px; border-radius:6px;
+}
+.contact-links a.primary{background:var(--teal); border-color:var(--teal);}
+.contact-links a:hover{border-color:#6E7A93;}
+
+footer{padding:26px 0 50px; text-align:center;}
+footer p{font-family:'JetBrains Mono',monospace; font-size:12.5px; color:var(--ink-soft);}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="nav-logo">Mijala Maharjan</div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a class="nav-cta" href="#contact">Get in touch</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="eyebrow">Open to React Developer roles</p>
+      <h1>Hi, I'm Mijala Maharjan</h1>
+      <p class="lede">B.Sc. CSIT student and MERN stack developer. I build responsive React frontends backed by real APIs and databases most recently as a MERN stack intern at Code IT, where I helped ship NepEats from planning through implementation.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#projects">View projects</a>
+        <a class="btn btn-ghost" href="https://github.com/Mijala-28" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+
+    <div class="photo-frame">
+      <img src="College_photo.jpeg" alt="Mijala Maharjan" onerror="this.style.display='none'; this.parentElement.querySelector('.photo-fallback').style.display='flex';">
+      <div class="photo-fallback">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-6 8-6s8 2 8 6"/></svg>
+        <span>Add your photo</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<hr class="divider">
+
+<section id="about">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-tag">01</span>
+      <h2>About</h2>
+    </div>
+    <div class="about-grid">
+      <p>
+        I'm a final-year B.Sc. CSIT student who likes finishing what I build. During a 12-week remote MERN stack internship at Code IT, I worked inside an agile team to take NepEats, a food delivery platform, from planning through implementation — building React frontends, REST APIs, and MongoDB schemas alongside a real sprint cycle. Outside the MERN stack, I also built a political fake news detection system, which taught me to think carefully about data, not just UI.
+        <br><br>
+        Right now I'm looking for a React Developer role where I can keep building production-grade frontends and grow alongside an engineering team.
+      </p>
+      <ul class="stack-list">
+        <li><b>Frontend</b><span>React, JavaScript, HTML/CSS</span></li>
+        <li><b>Backend</b><span>Node.js, Express.js, Flask</span></li>
+        <li><b>Database</b><span>MongoDB, MySQL</span></li>
+        <li><b>Tools</b><span>Git, GitHub, Postman, VS Code</span></li>
+        <li><b>Also</b><span>Scikit-learn, TF-IDF, NLP</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section id="projects">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-tag">02</span>
+      <h2>Projects</h2>
+    </div>
+
+    <div class="project-card">
+      <div class="project-top">
+        <div>
+          <span class="project-kicker">Team project · MERN stack</span>
+          <h3>NepEats — Online Food Delivery System</h3>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/Mijala-28/NepEats" target="_blank" rel="noopener">Code ↗</a>
+        </div>
+      </div>
+      <p class="desc">A full-stack food delivery platform connecting users and restaurants, built within an agile, sprint-based team during my internship at Code IT. I developed responsive React frontends using functional components and hooks, and built REST APIs for menu management, ordering, and restaurant listings, backed by MongoDB schemas for users, restaurants, and orders.</p>
+      <div class="tag-row">
+        <span class="tag">React</span>
+        <span class="tag">Node.js</span>
+        <span class="tag">Express.js</span>
+        <span class="tag">MongoDB</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-top">
+        <div>
+          <span class="project-kicker">Final year project · Machine learning</span>
+          <h3>Political Fake News Detection System</h3>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/Mijala-28/Fake_News_Detection_System" target="_blank" rel="noopener">Code ↗</a>
+        </div>
+      </div>
+      <p class="desc">A machine learning system that classifies political news articles as fake or real. I preprocessed raw text and engineered features using word- and character-level TF-IDF combined via Feature Union, benchmarked Naive Bayes, Logistic Regression, and Linear SVC, and deployed the winning model through a Flask web interface for real-time predictions.</p>
+      <div class="tag-row">
+        <span class="tag amber">Python</span>
+        <span class="tag amber">Scikit-learn</span>
+        <span class="tag amber">Flask</span>
+        <span class="tag amber">TF-IDF</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section id="experience">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-tag">03</span>
+      <h2>Experience</h2>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-date">Apr – Jun 2026<br>Remote</div>
+      <div>
+        <h3>MERN Stack Intern — Code IT</h3>
+        <p>12-week structured internship covering the full MERN stack, followed by hands-on project development.</p>
+        <ul>
+          <li>Worked within an agile team to build NepEats from planning through implementation.</li>
+          <li>Contributed to both frontend and backend development across user-facing and restaurant-facing modules.</li>
+          <li>Gained practical, real-world experience with React, Node.js, Express.js, MongoDB, and Git.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-date">2023 – Present</div>
+      <div>
+        <h3>B.Sc. CSIT — Academia International College, TU</h3>
+        <p>Currently pursuing a bachelor's degree in Computer Science and Information Technology.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="contact-card">
+      <div>
+        <h2>Let's build something.</h2>
+        <p>Open to React Developer opportunities — including fresher and graduate roles. Reach out any time.</p>
+      </div>
+      <div class="contact-links">
+        <a class="primary" href="mailto:mijalamaharjan14@gmail.com">Email me</a>
+        <a href="https://github.com/Mijala-28" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://linkedin.com/in/Mijala-Maharjan" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Built by Mijala Maharjan · 2026</p>
+</footer>
+
+</body>
+</html>
